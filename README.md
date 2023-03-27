@@ -1,5 +1,5 @@
 # Haas VF-OE Uploader 
-![enter image description here](https://raw.githubusercontent.com/sudobob/haas_uploader/master/static/haas_clipped_128w.png)
+![Haas CNC Vertical Mill](https://github.com/nova-labs/haas_uploader/blob/main/static/haas_clipped_128w.png)
 
 The Haas uploader provides a web-based file upload interface to send jobs to the Haas-VF-OE CNC mill
 
@@ -21,10 +21,10 @@ This application runs on a dedicated raspberry pi with a touch screen.
 - if this is a new pi do a `sudo apt-get upgrade`  and if this is not a brand new distro then  a `sudo apt-get dist-upgrade`
 -  install this repo into `/home/pi/haas_uploader` and `cd haas_uploader`
 - If this was a -lite distro like raspbian buster lite  you'll need to do a 
-`sudo apt-get install lightdm xserver-xorg lxde chromium-browser gunicorn3`
+`sudo apt-get install lightdm xserver-xorg lxde chromium-browser`
 You should use doa a `sudo raspi-config` and select __Boot Options -> Desktop/CLI -> Desktop Autologin__ Then reboot
-- install python package installer pip3
- `sudo apt-get install python3-pip`
+- install python package installer pip3 and gunicorn3
+ `sudo apt-get install python3-pip gunicorn3`
 - install python packages with 
 `sudo -H pip3 install -r requirements.txt`
  *Note since this is a dedicated raspi I don't see the need to use virtualenv*
@@ -40,12 +40,11 @@ sudo systemctl enable serial_sender
      
 - configure the a browser instance to come up on the local touch screen in kiosk mode at boot time. 
 - LXDE will only start an application once the Raspian UI is up and running, so it avoids race conditions
-- If a file already exists, rename it as below. If it does not exist, make the directories
-mv /home/pi/.config/lxsession/LXDE/autostart /home/pi/.config/lxsession/LXDE/autostart-
+- If the older style of autostart exists rename it as below. 
+`mv /home/pi/.config/lxsession/LXDE/autostart /home/pi/.config/lxsession/LXDE/autostart-`
 
-- Create directory if needed, and create link Lto the supplied autostart
+- If none exists then create directory if needed, and create link Lto the supplied autostart
 `ln -s /home/pi/haas_uploader/autostart /home/pi/.config/lxsession/LXDE-pi/`
-
 
 `mkdir /home/pi/haas_uploader/uploads`
 
