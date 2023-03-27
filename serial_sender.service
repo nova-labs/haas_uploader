@@ -1,0 +1,9 @@
+[Unit]
+ Description = serial sender for the haas
+[Service]
+ ExecStart = /usr/bin/python3 /home/pi/haas_uploader/serial_sender.py
+ Type = simple
+[Install]
+ WantedBy=multi-user.target
+
+
