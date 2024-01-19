@@ -144,7 +144,7 @@ DEFAULT_SERIAL_PORT_NAME = "/dev/ttyUSB0"
 DEFAULT_TCP_PORT = 1111
 DEFAULT_UPLOAD_PATH = "/home/pi/matsuura_uploader/uploads"
 
-BAUD = 9600     # Not meant to be changed
+BAUD = 38400     # Not meant to be changed, but changed anyway.
 
 LOG_TO_SYSLOG = True        # Else log to stderr
 
@@ -594,7 +594,7 @@ class FileToSend:
             self.line_buf[-1] += "%"
 
         # Add initial blank line for the Matsuura LSK (Leader Skip) to eat.
-        self.line_buf.insert(0, "\r\n")
+        self.line_buf.insert(0, "%\r\n")
 
         self.lines_sent = 0
         self.crc32_value = 0    # Reset -- computed as read()/sent
@@ -664,7 +664,7 @@ class SerialPort:
             Will raise serial.SerialException on error.
         """
         self.serial_connection = serial.Serial(self.port_name,
-                                               9600,
+                                               38400,
                                                parity=serial.PARITY_NONE,
                                                write_timeout=None,
                                                xonxoff=False,
